@@ -12,11 +12,6 @@ import { validationService } from "./validation/service";
 export default class App extends Component {
   constructor(props) {
     super(props);
-
-    this.onInputChange = validationService.onInputChange.bind(this);
-    this.getFormValidation = validationService.getFormValidation.bind(this);
-    this.submit = this.submit.bind(this);
-
     this.state = {
       inputs: {
         first_name: {
@@ -37,6 +32,10 @@ export default class App extends Component {
         }
       }
     };
+
+    this.onInputChange = validationService.onInputChange.bind(this);
+    this.getFormValidation = validationService.getFormValidation.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   submit() {

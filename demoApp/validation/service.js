@@ -31,7 +31,7 @@ function getInputValidationState({ input, value }) {
     value,
     errorLabel: input.optional
       ? null
-      : validateInput({ type: input.type, value: value || input.value })
+      : validateInput({ type: input.type, value })
   };
 }
 
@@ -59,7 +59,8 @@ function getFormValidation() {
 
   for (const [key, input] of Object.entries(inputs)) {
     updatedInputs[key] = getInputValidationState({
-      input
+      input,
+      value: input.value
     });
   }
 

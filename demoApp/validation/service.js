@@ -7,7 +7,8 @@ export const validationService = {
   getInputValidationState,
   validateInput,
   getFormValidation,
-  setInputPosition
+  setInputPosition,
+  getFirstInvalidInput
 };
 
 function onInputChange({ id, value, cb = () => {} }) {
@@ -68,6 +69,8 @@ function getFormValidation() {
   this.setState({
     inputs: updatedInputs
   });
+
+  return getFirstInvalidInput({ inputs: updatedInputs });
 }
 
 function setInputPosition({ ids, value }) {
@@ -84,4 +87,20 @@ function setInputPosition({ ids, value }) {
   this.setState({
     inputs: updatedInputs
   });
+}
+
+function getFirstInvalidInput({ inputs }) {
+  let firstInvalidCoordinate = Infinity;
+
+  for (const [key, input] of Object.entries(inputs)) {
+    if (input.errorLabel && input.yCoordinate < firstInvalidCoordinate) {
+      firstInvalidCoordinate = input.yCoordinate;
+    }
+  }
+
+  if (firstInvalidCoordinate === Infinity) {
+    firstInvalidCoordinate = null;
+  }
+
+  return firstInvalidCoordinate;
 }

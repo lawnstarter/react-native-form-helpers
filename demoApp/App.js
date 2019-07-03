@@ -54,7 +54,18 @@ export default class App extends Component {
   }
 
   submit() {
-    this.getFormValidation();
+    const firstInvalidCoordinate = this.getFormValidation();
+
+    if (firstInvalidCoordinate) {
+      this.scrollView.scrollTo({
+        x: 0,
+        y: firstInvalidCoordinate,
+        animated: true
+      });
+      return;
+    }
+
+    // if we make it to this point, we can actually submit the form
   }
 
   renderError(id) {
@@ -68,7 +79,11 @@ export default class App extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <ScrollView>
+        <ScrollView
+          ref={ref => {
+            this.scrollView = ref;
+          }}
+        >
           <View
             onLayout={({ nativeEvent }) => {
               this.setInputPosition({

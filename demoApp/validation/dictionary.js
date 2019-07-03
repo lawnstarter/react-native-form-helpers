@@ -1,7 +1,7 @@
 export const validationDictionary = {
   bool: {
-    presence: {
-      allowEmpty: false,
+    inclusion: {
+      within: [true],
       message: "^This is required"
     }
   },

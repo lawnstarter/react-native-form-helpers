@@ -46,6 +46,9 @@ function validateInput({ type, value }) {
     }
   );
 
+  console.log("type,value", type, value);
+  console.log("type,validationDictionary", type, validationDictionary[type]);
+
   if (result) {
     return result[type][0];
   }

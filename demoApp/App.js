@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView,
+  Switch
 } from "react-native";
 import { validationService } from "./validation/service";
 
@@ -29,6 +31,18 @@ export default class App extends Component {
         birthday_day: {
           type: "day",
           value: ""
+        },
+        state: {
+          type: "state",
+          value: ""
+        },
+        zip: {
+          type: "zip",
+          value: ""
+        },
+        tos: {
+          type: "bool",
+          value: false
         }
       }
     };
@@ -53,37 +67,39 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <ScrollView>
-          <View>
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["first_name"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
             <Text>First Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
                 this.onInputChange({ id: "first_name", value });
               }}
-              onLayout={({ nativeEvent }) => {
-                this.setInputPosition({
-                  ids: ["first_name"],
-                  value: nativeEvent.layout.y
-                });
-              }}
             />
             {this.renderError("first_name")}
           </View>
 
-          <View>
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["last_name"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
             <Text>Last Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
                 this.onInputChange({ id: "last_name", value });
-              }}
-              onLayout={({ nativeEvent }) => {
-                this.setInputPosition({
-                  ids: ["last_name"],
-                  value: nativeEvent.layout.y
-                });
               }}
             />
             {this.renderError("last_name")}
@@ -121,12 +137,78 @@ export default class App extends Component {
               </View>
             </View>
           </View>
+
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["state"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
+            <Text>State</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={value => {
+                this.onInputChange({ id: "state", value });
+              }}
+              autoCapitalize="characters"
+              maxLength={2}
+            />
+            {this.renderError("state")}
+          </View>
+
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["zip"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
+            <Text>Zip</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={value => {
+                this.onInputChange({ id: "zip", value });
+              }}
+              maxLength={5}
+              keyboardType="number-pad"
+            />
+            {this.renderError("zip")}
+          </View>
+
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["tos"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingBottom: 20
+              }}
+            >
+              <Switch
+                value={this.state.inputs.tos.value}
+                onValueChange={value => {
+                  this.onInputChange({ id: "tos", value });
+                }}
+              />
+              <Text style={{ paddingLeft: 10 }}>Do you agree to the TOS?</Text>
+            </View>
+            {this.renderError("tos")}
+          </View>
         </ScrollView>
 
         <View style={styles.button}>
           <Button title="Submit Form" onPress={this.submit} />
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -135,7 +217,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
-    paddingTop: 50
+    paddingTop: 50,
+    paddingBottom: 10
   },
   input: {
     borderWidth: 1,
@@ -154,8 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   button: {
-    flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 20
+    flex: 0,
+    justifyContent: "flex-end"
   }
 });

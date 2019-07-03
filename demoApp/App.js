@@ -35,6 +35,7 @@ export default class App extends Component {
 
     this.onInputChange = validationService.onInputChange.bind(this);
     this.getFormValidation = validationService.getFormValidation.bind(this);
+    this.setInputPosition = validationService.setInputPosition.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -61,6 +62,12 @@ export default class App extends Component {
               onChangeText={value => {
                 this.onInputChange({ id: "first_name", value });
               }}
+              onLayout={({ nativeEvent }) => {
+                this.setInputPosition({
+                  ids: ["first_name"],
+                  value: nativeEvent.layout.y
+                });
+              }}
             />
             {this.renderError("first_name")}
           </View>
@@ -72,11 +79,24 @@ export default class App extends Component {
               onChangeText={value => {
                 this.onInputChange({ id: "last_name", value });
               }}
+              onLayout={({ nativeEvent }) => {
+                this.setInputPosition({
+                  ids: ["last_name"],
+                  value: nativeEvent.layout.y
+                });
+              }}
             />
             {this.renderError("last_name")}
           </View>
 
-          <View>
+          <View
+            onLayout={({ nativeEvent }) => {
+              this.setInputPosition({
+                ids: ["birthday_month", "birthday_day"],
+                value: nativeEvent.layout.y
+              });
+            }}
+          >
             <Text>Birthday?</Text>
             <View style={styles.split}>
               <View style={{ flex: 1, marginRight: 5 }}>

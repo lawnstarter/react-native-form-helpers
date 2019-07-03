@@ -6,7 +6,8 @@ export const validationService = {
   onInputChange,
   getInputValidationState,
   validateInput,
-  getFormValidation
+  getFormValidation,
+  setInputPosition
 };
 
 function onInputChange({ id, value, cb = () => {} }) {
@@ -63,6 +64,22 @@ function getFormValidation() {
       value: input.value
     });
   }
+
+  this.setState({
+    inputs: updatedInputs
+  });
+}
+
+function setInputPosition({ ids, value }) {
+  const { inputs } = this.state;
+
+  const updatedInputs = {
+    ...inputs
+  };
+
+  ids.forEach(id => {
+    updatedInputs[id].yCoordinate = value;
+  });
 
   this.setState({
     inputs: updatedInputs

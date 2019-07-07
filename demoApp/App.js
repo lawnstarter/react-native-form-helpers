@@ -51,13 +51,15 @@ export default class App extends Component {
     this.getFormValidation = validationService.getFormValidation.bind(this);
     this.setInputPosition = validationService.setInputPosition.bind(this);
     this.submit = this.submit.bind(this);
+
+    this.scrollView = React.createRef();
   }
 
   submit() {
     const firstInvalidCoordinate = this.getFormValidation();
 
-    if (firstInvalidCoordinate) {
-      this.scrollView.scrollTo({
+    if (firstInvalidCoordinate !== null) {
+      this.scrollView.current.scrollTo({
         x: 0,
         y: firstInvalidCoordinate,
         animated: true
@@ -79,11 +81,7 @@ export default class App extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <ScrollView
-          ref={ref => {
-            this.scrollView = ref;
-          }}
-        >
+        <ScrollView ref={this.scrollView}>
           <View
             onLayout={({ nativeEvent }) => {
               this.setInputPosition({

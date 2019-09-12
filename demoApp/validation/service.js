@@ -1,6 +1,6 @@
-import validatejs from "validate.js";
+import validatejs from 'validate.js';
 
-import { validationDictionary } from "./dictionary";
+import {validationDictionary} from './dictionary';
 
 export const validationService = {
   onInputChange,
@@ -8,43 +8,43 @@ export const validationService = {
   validateInput,
   getFormValidation,
   setInputPosition,
-  getFirstInvalidInput
+  getFirstInvalidInput,
 };
 
-function onInputChange({ id, value, cb = () => {} }) {
-  const { inputs } = this.state;
+function onInputChange({id, value, cb = () => {}}) {
+  const {inputs} = this.state;
   this.setState(
     {
       inputs: {
         ...inputs,
         [id]: getInputValidationState({
           input: inputs[id],
-          value
-        })
-      }
+          value,
+        }),
+      },
     },
-    cb
+    cb,
   );
 }
 
-function getInputValidationState({ input, value }) {
+function getInputValidationState({input, value}) {
   return {
     ...input,
     value,
     errorLabel: input.optional
       ? null
-      : validateInput({ type: input.type, value })
+      : validateInput({type: input.type, value}),
   };
 }
 
-function validateInput({ type, value }) {
+function validateInput({type, value}) {
   const result = validatejs(
     {
-      [type]: value
+      [type]: value,
     },
     {
-      [type]: validationDictionary[type]
-    }
+      [type]: validationDictionary[type],
+    },
   );
 
   if (result) {
@@ -55,29 +55,29 @@ function validateInput({ type, value }) {
 }
 
 function getFormValidation() {
-  const { inputs } = this.state;
+  const {inputs} = this.state;
 
   const updatedInputs = {};
 
   for (const [key, input] of Object.entries(inputs)) {
     updatedInputs[key] = getInputValidationState({
       input,
-      value: input.value
+      value: input.value,
     });
   }
 
   this.setState({
-    inputs: updatedInputs
+    inputs: updatedInputs,
   });
 
-  return getFirstInvalidInput({ inputs: updatedInputs });
+  return getFirstInvalidInput({inputs: updatedInputs});
 }
 
-function setInputPosition({ ids, value }) {
-  const { inputs } = this.state;
+function setInputPosition({ids, value}) {
+  const {inputs} = this.state;
 
   const updatedInputs = {
-    ...inputs
+    ...inputs,
   };
 
   ids.forEach(id => {
@@ -85,11 +85,11 @@ function setInputPosition({ ids, value }) {
   });
 
   this.setState({
-    inputs: updatedInputs
+    inputs: updatedInputs,
   });
 }
 
-function getFirstInvalidInput({ inputs }) {
+function getFirstInvalidInput({inputs}) {
   let firstInvalidCoordinate = Infinity;
 
   for (const [key, input] of Object.entries(inputs)) {

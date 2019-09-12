@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
   Button,
   View,
@@ -7,9 +7,9 @@ import {
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
-  Switch
-} from "react-native";
-import { validationService } from "./validation/service";
+  Switch,
+} from 'react-native';
+import {validationService} from './validation/service';
 
 export default class App extends Component {
   constructor(props) {
@@ -17,34 +17,34 @@ export default class App extends Component {
     this.state = {
       inputs: {
         first_name: {
-          type: "generic",
-          value: ""
+          type: 'generic',
+          value: '',
         },
         last_name: {
-          type: "generic",
-          value: ""
+          type: 'generic',
+          value: '',
         },
         birthday_month: {
-          type: "month",
-          value: ""
+          type: 'month',
+          value: '',
         },
         birthday_day: {
-          type: "day",
-          value: ""
+          type: 'day',
+          value: '',
         },
         state: {
-          type: "state",
-          value: ""
+          type: 'state',
+          value: '',
         },
         zip: {
-          type: "zip",
-          value: ""
+          type: 'zip',
+          value: '',
         },
         tos: {
-          type: "bool",
-          value: false
-        }
-      }
+          type: 'bool',
+          value: false,
+        },
+      },
     };
 
     this.onInputChange = validationService.onInputChange.bind(this);
@@ -62,7 +62,7 @@ export default class App extends Component {
       this.scrollView.current.scrollTo({
         x: 0,
         y: firstInvalidCoordinate,
-        animated: true
+        animated: true,
       });
       return;
     }
@@ -71,7 +71,7 @@ export default class App extends Component {
   }
 
   renderError(id) {
-    const { inputs } = this.state;
+    const {inputs} = this.state;
     if (inputs[id].errorLabel) {
       return <Text style={styles.error}>{inputs[id].errorLabel}</Text>;
     }
@@ -83,138 +83,131 @@ export default class App extends Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <ScrollView ref={this.scrollView}>
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["first_name"],
-                value: nativeEvent.layout.y
+                ids: ['first_name'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <Text>First Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
-                this.onInputChange({ id: "first_name", value });
+                this.onInputChange({id: 'first_name', value});
               }}
             />
-            {this.renderError("first_name")}
+            {this.renderError('first_name')}
           </View>
 
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["last_name"],
-                value: nativeEvent.layout.y
+                ids: ['last_name'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <Text>Last Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
-                this.onInputChange({ id: "last_name", value });
+                this.onInputChange({id: 'last_name', value});
               }}
             />
-            {this.renderError("last_name")}
+            {this.renderError('last_name')}
           </View>
 
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["birthday_month", "birthday_day"],
-                value: nativeEvent.layout.y
+                ids: ['birthday_month', 'birthday_day'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <Text>Birthday?</Text>
             <View style={styles.split}>
-              <View style={{ flex: 1, marginRight: 5 }}>
+              <View style={{flex: 1, marginRight: 5}}>
                 <TextInput
                   style={styles.input}
                   placeholder="Month"
                   onChangeText={value => {
-                    this.onInputChange({ id: "birthday_month", value });
+                    this.onInputChange({id: 'birthday_month', value});
                   }}
                 />
-                {this.renderError("birthday_month")}
+                {this.renderError('birthday_month')}
               </View>
-              <View style={{ flex: 1, marginLeft: 5 }}>
+              <View style={{flex: 1, marginLeft: 5}}>
                 <TextInput
                   style={styles.input}
                   placeholder="Day"
                   onChangeText={value => {
-                    this.onInputChange({ id: "birthday_day", value });
+                    this.onInputChange({id: 'birthday_day', value});
                   }}
                 />
-                {this.renderError("birthday_day")}
+                {this.renderError('birthday_day')}
               </View>
             </View>
           </View>
 
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["state"],
-                value: nativeEvent.layout.y
+                ids: ['state'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <Text>State</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
-                this.onInputChange({ id: "state", value });
+                this.onInputChange({id: 'state', value});
               }}
               autoCapitalize="characters"
               maxLength={2}
             />
-            {this.renderError("state")}
+            {this.renderError('state')}
           </View>
 
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["zip"],
-                value: nativeEvent.layout.y
+                ids: ['zip'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <Text>Zip</Text>
             <TextInput
               style={styles.input}
               onChangeText={value => {
-                this.onInputChange({ id: "zip", value });
+                this.onInputChange({id: 'zip', value});
               }}
               maxLength={5}
               keyboardType="number-pad"
             />
-            {this.renderError("zip")}
+            {this.renderError('zip')}
           </View>
 
           <View
-            onLayout={({ nativeEvent }) => {
+            onLayout={({nativeEvent}) => {
               this.setInputPosition({
-                ids: ["tos"],
-                value: nativeEvent.layout.y
+                ids: ['tos'],
+                value: nativeEvent.layout.y,
               });
-            }}
-          >
+            }}>
             <View
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                paddingBottom: 20
-              }}
-            >
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingBottom: 20,
+              }}>
               <Switch
                 value={this.state.inputs.tos.value}
                 onValueChange={value => {
-                  this.onInputChange({ id: "tos", value });
+                  this.onInputChange({id: 'tos', value});
                 }}
               />
-              <Text style={{ paddingLeft: 10 }}>Do you agree to the TOS?</Text>
+              <Text style={{paddingLeft: 10}}>Do you agree to the TOS?</Text>
             </View>
-            {this.renderError("tos")}
+            {this.renderError('tos')}
           </View>
         </ScrollView>
 
@@ -231,26 +224,26 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
     paddingTop: 50,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: 'black',
     padding: 10,
     marginBottom: 15,
-    alignSelf: "stretch"
+    alignSelf: 'stretch',
   },
   split: {
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   error: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    color: "red",
-    fontSize: 12
+    color: 'red',
+    fontSize: 12,
   },
   button: {
     flex: 0,
-    justifyContent: "flex-end"
-  }
+    justifyContent: 'flex-end',
+  },
 });

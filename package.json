@@ -1,12 +1,12 @@
 {
   "name": "react-native-form-helpers",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "React Native tutorials, helpers, and demo app for form validation and scroll to invalid logic",
   "license": "MIT",
   "author": "Michael Lefkowitz <lefkowitz.michael@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lawnstarter/react-native-picker-select.git"
+    "url": "https://github.com/lawnstarter/react-native-form-helpers.git"
   },
   "main": "src/index.js",
   "keywords": [

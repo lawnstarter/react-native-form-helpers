@@ -1,6 +1,27 @@
 {
   "name": "react-native-form-helpers",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": "Michael Lefkowitz <lefkowitz.michael@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lawnstarter/react-native-picker-select.git"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "expo",
+    "form",
+    "react",
+    "react native",
+    "react-native",
+    "validation"
+  ],
+  "files": [
+    "/src"
+  ],
+  "dependencies": {
+    "validate.js": "^0.13.1"
+  },
+  "scripts": {}
 }

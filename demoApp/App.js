@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {
   Button,
   View,
@@ -30,6 +30,10 @@ export default class App extends Component {
         },
         birthday_day: {
           type: 'day',
+          value: '',
+        },
+        birthday_year: {
+          type: 'year',
           value: '',
         },
         state: {
@@ -116,15 +120,16 @@ export default class App extends Component {
             {this.renderError('last_name')}
           </View>
 
-          <View
-            onLayout={({nativeEvent}) => {
-              this.setInputPosition({
-                ids: ['birthday_month', 'birthday_day'],
-                value: nativeEvent.layout.y,
-              });
-            }}>
+          <Fragment>
             <Text>Birthday?</Text>
-            <View style={styles.split}>
+            <View
+              onLayout={({nativeEvent}) => {
+                this.setInputPosition({
+                  ids: ['birthday_month', 'birthday_day'],
+                  value: nativeEvent.layout.y,
+                });
+              }}
+              style={styles.split}>
               <View style={{flex: 1, marginRight: 5}}>
                 <TextInput
                   style={styles.input}
@@ -146,7 +151,23 @@ export default class App extends Component {
                 {this.renderError('birthday_day')}
               </View>
             </View>
-          </View>
+            <View
+              onLayout={({nativeEvent}) => {
+                this.setInputPosition({
+                  ids: ['birthday_year'],
+                  value: nativeEvent.layout.y,
+                });
+              }}>
+              <TextInput
+                style={styles.input}
+                placeholder="Year"
+                onChangeText={value => {
+                  this.onInputChange({id: 'birthday_year', value});
+                }}
+              />
+              {this.renderError('birthday_year')}
+            </View>
+          </Fragment>
 
           <View
             onLayout={({nativeEvent}) => {

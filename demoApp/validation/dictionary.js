@@ -144,6 +144,18 @@ export const validationDictionary = {
     },
   },
 
+  year: {
+    presence: {
+      allowEmpty: false,
+      message: '^This is required',
+    },
+    numericality: {
+      greaterThan: 1900,
+      lessThanOrEqualTo: new Date().getFullYear(),
+      message: '^Must be valid',
+    },
+  },
+
   zip: {
     presence: {
       allowEmpty: false,

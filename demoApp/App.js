@@ -76,7 +76,7 @@ export default class App extends Component {
 
   renderError(id) {
     const {inputs} = this.state;
-    if (inputs[id].errorLabel) {
+    if (inputs[id].errorLabel && inputs[id].touched) {
       return <Text style={styles.error}>{inputs[id].errorLabel}</Text>;
     }
     return null;
@@ -94,7 +94,6 @@ export default class App extends Component {
               this.onInputChange({id: 'first_name', value});
             }}
             errorLabel={inputs.first_name.errorLabel}
-            touched={inputs.first_name.touched}
             onLayout={({nativeEvent}) => {
               this.setInputPosition({
                 ids: ['first_name'],
@@ -109,7 +108,6 @@ export default class App extends Component {
               this.onInputChange({id: 'last_name', value});
             }}
             errorLabel={inputs.last_name.errorLabel}
-            touched={inputs.last_name.touched}
             onLayout={({nativeEvent}) => {
               this.setInputPosition({
                 ids: ['last_name'],
@@ -134,7 +132,6 @@ export default class App extends Component {
                     this.onInputChange({id: 'birthday_month', value});
                   }}
                   errorLabel={inputs.birthday_month.errorLabel}
-                  touched={inputs.birthday_month.touched}
                   placeholder="Month"
                   keyboardType="number-pad"
                 />
@@ -145,7 +142,6 @@ export default class App extends Component {
                     this.onInputChange({id: 'birthday_day', value});
                   }}
                   errorLabel={inputs.birthday_day.errorLabel}
-                  touched={inputs.birthday_day.touched}
                   placeholder="Day"
                   keyboardType="number-pad"
                 />
@@ -156,7 +152,6 @@ export default class App extends Component {
                 this.onInputChange({id: 'birthday_year', value});
               }}
               errorLabel={inputs.birthday_year.errorLabel}
-              touched={inputs.birthday_year.touched}
               placeholder="Year"
               keyboardType="number-pad"
             />
@@ -168,7 +163,6 @@ export default class App extends Component {
               this.onInputChange({id: 'state', value});
             }}
             errorLabel={inputs.state.errorLabel}
-            touched={inputs.state.touched}
             onLayout={({nativeEvent}) => {
               this.setInputPosition({
                 ids: ['state'],
@@ -185,7 +179,6 @@ export default class App extends Component {
               this.onInputChange({id: 'zip', value});
             }}
             errorLabel={inputs.zip.errorLabel}
-            touched={inputs.zip.touched}
             onLayout={({nativeEvent}) => {
               this.setInputPosition({
                 ids: ['zip'],

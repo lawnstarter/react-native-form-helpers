@@ -27,14 +27,13 @@ function onInputChange({id, value, cb = () => {}}) {
   );
 }
 
-function getInputValidationState({input, value, touched}) {
+function getInputValidationState({input, value}) {
   return {
     ...input,
     value,
     errorLabel: input.optional
       ? null
       : validateInput({type: input.type, value}),
-    touched: touched || input.touched,
   };
 }
 
@@ -64,7 +63,6 @@ function getFormValidation() {
     updatedInputs[key] = getInputValidationState({
       input,
       value: input.value,
-      touched: true,
     });
   }
 

@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   Switch,
 } from 'react-native';
-import {validationService} from './validation/service';
+import {validationService} from './index';
 import FormInput from './components/FormInput';
 
 export default class App extends Component {

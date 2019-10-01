@@ -1,50 +1,50 @@
-import validatejs from "validate.js";
+import validatejs from 'validate.js';
 
-export default function RNFormHelpers({ dictionary }) {
+export default function RNFormHelpers({dictionary}) {
   const service = {
     onInputChange,
     getInputValidationState,
     validateInput,
     getFormValidation,
     setInputPosition,
-    getFirstInvalidInput
+    getFirstInvalidInput,
   };
 
-  function onInputChange({ id, value, cb = () => {} }) {
-    const { inputs } = this.state;
+  function onInputChange({id, value, cb = () => {}}) {
+    const {inputs} = this.state;
     this.setState(
       {
         inputs: {
           ...inputs,
           [id]: getInputValidationState({
             input: inputs[id],
-            value
-          })
-        }
+            value,
+          }),
+        },
       },
-      cb
+      cb,
     );
   }
 
-  function getInputValidationState({ input, value, touched }) {
+  function getInputValidationState({input, value, touched}) {
     return {
       ...input,
       value,
       errorLabel: input.optional
         ? null
-        : validateInput({ type: input.type, value }),
-      touched: touched || input.touched
+        : validateInput({type: input.type, value}),
+      touched: touched || input.touched,
     };
   }
 
-  function validateInput({ type, value }) {
+  function validateInput({type, value}) {
     const result = validatejs(
       {
-        [type]: value
+        [type]: value,
       },
       {
-        [type]: dictionary[type]
-      }
+        [type]: dictionary[type],
+      },
     );
 
     if (result) {
@@ -55,7 +55,7 @@ export default function RNFormHelpers({ dictionary }) {
   }
 
   function getFormValidation() {
-    const { inputs } = this.state;
+    const {inputs} = this.state;
 
     const updatedInputs = {};
 
@@ -63,22 +63,22 @@ export default function RNFormHelpers({ dictionary }) {
       updatedInputs[key] = getInputValidationState({
         input,
         value: input.value,
-        touched: true
+        touched: true,
       });
     }
 
     this.setState({
-      inputs: updatedInputs
+      inputs: updatedInputs,
     });
 
-    return getFirstInvalidInput({ inputs: updatedInputs });
+    return getFirstInvalidInput({inputs: updatedInputs});
   }
 
-  function setInputPosition({ ids, value }) {
-    const { inputs } = this.state;
+  function setInputPosition({ids, value}) {
+    const {inputs} = this.state;
 
     const updatedInputs = {
-      ...inputs
+      ...inputs,
     };
 
     ids.forEach(id => {
@@ -86,11 +86,11 @@ export default function RNFormHelpers({ dictionary }) {
     });
 
     this.setState({
-      inputs: updatedInputs
+      inputs: updatedInputs,
     });
   }
 
-  function getFirstInvalidInput({ inputs }) {
+  function getFirstInvalidInput({inputs}) {
     let firstInvalidCoordinate = Infinity;
 
     for (const [key, input] of Object.entries(inputs)) {

@@ -1,4 +1,5 @@
 # react-native-form-helpers
+[![npm version](https://badge.fury.io/js/react-native-form-helpers.svg)](https://badge.fury.io/js/react-native-form-helpers)
 
 **Step 1:**<br>
 `npm install react-native-form-helpers`

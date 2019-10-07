@@ -27,4 +27,4 @@ https://medium.com/lawnstarter-engineering/how-to-create-custom-forms-with-valid
 
 https://medium.com/lawnstarter-engineering/how-to-create-custom-forms-with-validation-and-scroll-to-invalid-logic-in-react-native-part-two-9834849d4d78
 
-// placeholder for part three
+https://medium.com/lawnstarter-engineering/how-to-create-custom-forms-with-validation-and-scroll-to-invalid-logic-in-react-native-f6a4cc049095
